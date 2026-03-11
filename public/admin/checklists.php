@@ -108,11 +108,19 @@ $checklists = Checklist::all();
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Тизме элементтери (ар бир сапта бирден)</label>
-                        <textarea name="items" rows="10" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none" required
+                                  <textarea name="items" rows="10" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none" required
                                   placeholder="Памперс&#10;Кийимдер&#10;Суусундук..."><?php 
                                     if ($editChecklist) {
-                                        $items = json_decode($editChecklist['items'], true);
-                                        echo htmlspecialchars(implode("\n", $items));
+                                        $itemsArr = json_decode($editChecklist['items'], true) ?: [];
+                                        $displayText = [];
+                                        foreach ($itemsArr as $itemVal) {
+                                            if (is_array($itemVal)) {
+                                                $displayText[] = isset($itemVal['text']) ? $itemVal['text'] : (isset($itemVal[0]) ? $itemVal[0] : '');
+                                            } else {
+                                                $displayText[] = $itemVal;
+                                            }
+                                        }
+                                        echo htmlspecialchars(implode("\n", $displayText));
                                     }
                                   ?></textarea>
                     </div>

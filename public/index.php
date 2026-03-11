@@ -210,12 +210,13 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
                         </h4>
                         <ul class="space-y-3">
                             <?php 
-                                $items = json_decode($c['items'], true);
+                                $items = json_decode($c['items'], true) ?: [];
                                 foreach ($items as $item): 
+                                    $text = is_array($item) ? ($item['text'] ?? '') : $item;
                             ?>
                                 <li class="flex items-start text-gray-700">
                                     <span class="text-pink-500 mr-3">✓</span>
-                                    <?php echo htmlspecialchars($item); ?>
+                                    <?php echo htmlspecialchars($text); ?>
                                 </li>
                             <?php endforeach; ?>
                         </ul>

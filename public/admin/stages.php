@@ -135,24 +135,24 @@ $periods = Period::all();
 
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Аталышы (Тема)</label>
-                        <input type="text" name="title" value="<?php echo $editStage ? htmlspecialchars($editStage['title']) : ''; ?>" 
+                        <input type="text" name="title" value="<?php echo $editStage ? htmlspecialchars($editStage['title'] ?? '') : ''; ?>" 
                                class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Кыскача маалымат</label>
-                        <textarea name="short_info" rows="4" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none"><?php echo $editStage ? htmlspecialchars($editStage['short_info']) : ''; ?></textarea>
+                        <textarea name="short_info" rows="4" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none"><?php echo $editStage ? htmlspecialchars($editStage['short_info'] ?? '') : ''; ?></textarea>
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">YouTube URL</label>
-                        <input type="text" name="youtube_url" value="<?php echo $editStage ? htmlspecialchars($editStage['youtube_url']) : ''; ?>" 
+                        <input type="text" name="youtube_url" value="<?php echo $editStage ? htmlspecialchars($editStage['youtube_url'] ?? '') : ''; ?>" 
                                placeholder="https://www.youtube.com/watch?v=..." class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none">
                     </div>
 
                     <div class="mb-6">
                         <label class="block text-gray-700 text-sm font-bold mb-2">WhatsApp Номер</label>
-                        <input type="text" name="whatsapp_number" value="<?php echo $editStage ? htmlspecialchars($editStage['whatsapp_number']) : ''; ?>" 
+                        <input type="text" name="whatsapp_number" value="<?php echo $editStage ? htmlspecialchars($editStage['whatsapp_number'] ?? '') : ''; ?>" 
                                placeholder="996700123456" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none">
                     </div>
 

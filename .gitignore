@@ -1,0 +1,21 @@
+# IDE files
+.idea/
+.vscode/
+
+# Environment variables
+.env
+
+# Logs and temporary files
+*.log
+tmp/
+
+# Uploaded files
+public/uploads/*
+!public/uploads/.gitkeep
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
