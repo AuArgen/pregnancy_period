@@ -240,7 +240,7 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
                         
                         <div class="accordion-content hidden px-8 pb-8">
                             <div class="h-px bg-pink-50 mb-6"></div>
-                            <ul class="space-y-4">
+                            <ul class="space-y-4 list-none">
                                 <?php 
                                     $items = json_decode($c['items'], true) ?: [];
                                     foreach ($items as $item): 
