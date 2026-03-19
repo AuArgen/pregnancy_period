@@ -230,7 +230,6 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
                     <div class="bg-white rounded-3xl shadow-sm border border-pink-100 overflow-hidden">
                         <button class="w-full p-8 flex justify-between items-center text-left focus:outline-none accordion-header hover:bg-pink-50/30 transition-colors">
                             <h4 class="text-xl font-bold text-pink-800 flex items-center">
-                                <!-- <span class="mr-3 text-2xl">📝</span> -->
                                 <?php echo htmlspecialchars($c['title']); ?>
                             </h4>
                             <svg class="w-6 h-6 text-pink-500 transform transition-transform duration-300 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -245,10 +244,13 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
                                     $items = json_decode($c['items'], true) ?: [];
                                     foreach ($items as $item): 
                                         $text = is_array($item) ? ($item['text'] ?? '') : $item;
+                                        // URL detection and linking
+                                        $escapedText = htmlspecialchars($text);
+                                        $urlPattern = '/(https?:\/\/[^\s\r\n]+)/';
+                                        $linkedText = preg_replace($urlPattern, '<a href="$1" target="_blank" class="text-pink-600 hover:underline break-all">$1</a>', $escapedText);
                                 ?>
                                     <li class="flex items-start text-gray-700 font-medium">
-                                        <div class="w-2 h-2 rounded-full bg-pink-300 mt-2 mr-4 flex-shrink-0"></div>
-                                        <?php echo htmlspecialchars($text); ?>
+                                        <?php echo $linkedText; ?>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
