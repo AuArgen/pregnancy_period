@@ -110,21 +110,45 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
         </div>
     </nav>
 
-    <script>
-        const btn = document.getElementById('menu-btn');
-        const menu = document.getElementById('mobile-menu');
+<script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+
+    // Закрывать меню при клике на ссылки
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
         });
+    });
 
-        // Закрывать меню при клике на ссылки
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
+    // Accordion Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.accordion-icon');
+                
+                // Close other items if needed (optional)
+                /*
+                document.querySelectorAll('.accordion-content').forEach(c => {
+                    if (c !== content) {
+                        c.classList.add('hidden');
+                        c.parentElement.querySelector('.accordion-icon').classList.remove('rotate-180');
+                    }
+                });
+                */
+
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
             });
         });
-    </script>
+    });
+</script>
 
     <header class="hero-bg py-24 px-6 text-center">
         <div class="max-w-3xl mx-auto">
@@ -195,36 +219,45 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
 
     <!-- Checklists Section -->
     <section id="checklists" class="py-20 bg-pink-50">
-        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h3 class="text-3xl font-bold text-gray-800 mb-4">Пайдалуу чеклисттер</h3>
                 <p class="text-gray-500">Керектүү буюмдардын жана иштердин тизмеси</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-4">
                 <?php foreach ($checklists as $c): ?>
-                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-pink-100">
-                        <h4 class="text-xl font-bold text-pink-800 mb-6 flex items-center">
-                            <span class="mr-3 text-2xl">📝</span>
-                            <?php echo htmlspecialchars($c['title']); ?>
-                        </h4>
-                        <ul class="space-y-3">
-                            <?php 
-                                $items = json_decode($c['items'], true) ?: [];
-                                foreach ($items as $item): 
-                                    $text = is_array($item) ? ($item['text'] ?? '') : $item;
-                            ?>
-                                <li class="flex items-start text-gray-700">
-                                    <span class="text-pink-500 mr-3">✓</span>
-                                    <?php echo htmlspecialchars($text); ?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                    <div class="bg-white rounded-3xl shadow-sm border border-pink-100 overflow-hidden">
+                        <button class="w-full p-8 flex justify-between items-center text-left focus:outline-none accordion-header hover:bg-pink-50/30 transition-colors">
+                            <h4 class="text-xl font-bold text-pink-800 flex items-center">
+                                <span class="mr-3 text-2xl">📝</span>
+                                <?php echo htmlspecialchars($c['title']); ?>
+                            </h4>
+                            <svg class="w-6 h-6 text-pink-500 transform transition-transform duration-300 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        
+                        <div class="accordion-content hidden px-8 pb-8">
+                            <div class="h-px bg-pink-50 mb-6"></div>
+                            <ul class="space-y-4">
+                                <?php 
+                                    $items = json_decode($c['items'], true) ?: [];
+                                    foreach ($items as $item): 
+                                        $text = is_array($item) ? ($item['text'] ?? '') : $item;
+                                ?>
+                                    <li class="flex items-start text-gray-700 font-medium">
+                                        <div class="w-2 h-2 rounded-full bg-pink-300 mt-2 mr-4 flex-shrink-0"></div>
+                                        <?php echo htmlspecialchars($text); ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
                     </div>
                 <?php endforeach; ?>
 
                 <?php if (empty($checklists)): ?>
-                    <div class="col-span-full text-center text-gray-400 py-10">
+                    <div class="text-center text-gray-400 py-10">
                         Азырынча чеклисттер кошула элек.
                     </div>
                 <?php endif; ?>
