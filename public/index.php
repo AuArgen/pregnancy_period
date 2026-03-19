@@ -230,7 +230,7 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
                     <div class="bg-white rounded-3xl shadow-sm border border-pink-100 overflow-hidden">
                         <button class="w-full p-8 flex justify-between items-center text-left focus:outline-none accordion-header hover:bg-pink-50/30 transition-colors">
                             <h4 class="text-xl font-bold text-pink-800 flex items-center">
-                                <span class="mr-3 text-2xl">📝</span>
+                                <!-- <span class="mr-3 text-2xl">📝</span> -->
                                 <?php echo htmlspecialchars($c['title']); ?>
                             </h4>
                             <svg class="w-6 h-6 text-pink-500 transform transition-transform duration-300 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
