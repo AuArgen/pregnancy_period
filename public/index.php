@@ -222,7 +222,7 @@ if (in_array($_SERVER['SCRIPT_NAME'], $allowed_scripts)) {
             <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h3 class="text-3xl font-bold text-gray-800 mb-4">Пайдалуу чеклисттер</h3>
-                <p class="text-gray-500">Керектүү буюмдардын жана иштердин тизмеси</p>
+                <!-- <p class="text-gray-500">Керектүү буюмдардын жана иштердин тизмеси</p> -->
             </div>
 
             <div class="space-y-4">
